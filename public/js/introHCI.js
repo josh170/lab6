@@ -17,6 +17,7 @@ function initializePage() {
 /*
  * Make an AJAX call to retrieve project details and add it in
  */
+var currentID;
 function addProjectDetails(e) {
 	// Prevent following the link
 	e.preventDefault();
@@ -27,6 +28,17 @@ function addProjectDetails(e) {
 	var idNumber = projectID.substr('project'.length);
 
 	console.log("User clicked on project " + idNumber);
+	var targetURL = '/projects/' + idNumber;
+	$.get(targetURL, addProject);
+	console.log("http://localhost:3000/project/" + idNumber);
+	currentID = projectID;
+}
+
+function addProject(result) {
+	console.log(result)
+	var projectHTML = '<a'
+	$( "#" + currentID +" .details").html(result(projectHTML));
+	
 }
 
 /*
